@@ -1,0 +1,2 @@
+import pytest
+import number_game
