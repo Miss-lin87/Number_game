@@ -1,4 +1,4 @@
-import inspect
+import time
 
 def start():
     """This calles the text explaining the game and how it works"""
@@ -13,7 +13,7 @@ def rang(ran_low=0, ran_hi=0):
         return ran_low, ran_hi
     except ValueError:
         print("That was not a valid number, try again")
-        rang()
+        return rang()
 
 def guesses():
     """This is the function for making guesses in the game"""
@@ -29,6 +29,19 @@ def comparison(target, guess):
 def test_valid(ran_low, ran_hi, guess):
     """This is a test to validate if the selection is within the range selected in the start."""
     try:
-        if guess not in range(ran_low, ran_hi): print("The guess is outside of selected range \n"); test_valid(ran_low, ran_hi, guesses())
+        if guess not in range(ran_low, ran_hi): print("The guess is outside of selected range \n"); return test_valid(ran_low, ran_hi, guesses())
         else: return guess
-    except ValueError: print("The guess must be a number. Please try again"); test_valid(ran_low,ran_hi,guesses())
+    except ValueError: print("The guess must be a number. Please try again"); return test_valid(ran_low,ran_hi,guesses())
+
+def wait(x):
+    """Simpel function to sleep X minutes"""
+    time.sleep(x)
+    return
+
+def progress_bar():
+    print("Wait while the result is checking")
+    x = 1
+    while x < 6:
+        wait(0.25)
+        print("Loading " + str(x*20) + "%")
+        x += 1
